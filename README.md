@@ -2,11 +2,18 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name               | string | null: false |
-| email              | string | null: false |
-| password           | string | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| nickname           | string  | null: false |
+| first_name         | string  | null: false |
+| last_name          | string  | null: false |
+| kana_first_name    | string  | null: false |
+| kana_last_name     | string  | null: false |
+| birth_year         | integer | null: false |
+| birth_month        | integer | null: false |
+| birth_day          | integer | null: false |
+| email              | string  | null: false |
+| encrypted_password | string  | null: false |
 
 ### Association
 
@@ -15,46 +22,51 @@
 
 ## items テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| name               | string     | null: false                    |
-| text               | string     | null: false                    |
-| category           | string     | null: false                    |
-| image              | string     | null: false                    |
-| price              | string     | null: false                    |
-| condition          | string     | null: false                    |
-| source             | string     | null: false                    |
-| user               | references | null: false, foreign_key: true |
+| Column                  | Type       | Options                        |
+| ----------------------- | ---------- | ------------------------------ |
+| name                    | string     | null: false                    |
+| message                 | text       | null: false                    |
+| category_id             | integer    | null: false                    |
+| price                   | integer    | null: false                    |
+| condition_id            | integer    | null: false                    |
+| shipping_cost_burden_id | integer    | null: false                    |
+| shipping_origin_id      | integer    | null: false                    |
+| days_to_ship_id         | integer    | null: false                    |
+| user                    | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_one    :purchases
+- belongs_to :user
+- has_one    :purchase
 
 ## purchases テーブル
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
-| number         | string     | null: false                    |
-| date of expiry | string     | null: false                    |
-| cvc            | string     | null: false                    |
 | user           | references | null: false, foreign_key: true |
 | item           | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 - has_many :shipping address
 
-## shipping address テーブル
+## shipping_address テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| delivery charge | string     | null: false                    |
-| delivery date   | string     | null: false                    |
+| card_number     | string     | null: false                    |
+| expiration_date | string     | null: false                    |
+| security_code   | string     | null: false                    |
+| postal_code     | string     | null: false                    |
+| prefecture      | integer    | null: false                    |
+| city            | string     | null: false                    |
+| street          | string     | null: false                    |
+| building_name   | string     | null: false                    |
+| phone_number    | string     | null: false                    |
 | purchase        | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchases
+- belongs_to :purchase
