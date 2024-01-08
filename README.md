@@ -48,7 +48,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :shipping address
+- has_one    :shipping_address
 
 ## shipping_address テーブル
 
