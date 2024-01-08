@@ -2,18 +2,16 @@
 
 ## users テーブル
 
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| nickname           | string  | null: false |
-| first_name         | string  | null: false |
-| last_name          | string  | null: false |
-| kana_first_name    | string  | null: false |
-| kana_last_name     | string  | null: false |
-| birth_year         | integer | null: false |
-| birth_month        | integer | null: false |
-| birth_day          | integer | null: false |
-| email              | string  | null: false |
-| encrypted_password | string  | null: false |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_name          | string  | null: false               |
+| kana_first_name    | string  | null: false               |
+| kana_last_name     | string  | null: false               |
+| birth_day          | date    | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
 
 ### Association
 
@@ -30,7 +28,7 @@
 | price                   | integer    | null: false                    |
 | condition_id            | integer    | null: false                    |
 | shipping_cost_burden_id | integer    | null: false                    |
-| shipping_origin_id      | integer    | null: false                    |
+| prefecture_id           | integer    | null: false                    |
 | days_to_ship_id         | integer    | null: false                    |
 | user                    | references | null: false, foreign_key: true |
 
@@ -50,20 +48,17 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_many :shipping address
+- has_one    :shipping address
 
 ## shipping_address テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| card_number     | string     | null: false                    |
-| expiration_date | string     | null: false                    |
-| security_code   | string     | null: false                    |
 | postal_code     | string     | null: false                    |
-| prefecture      | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | city            | string     | null: false                    |
 | street          | string     | null: false                    |
-| building_name   | string     | null: false                    |
+| building_name   | string     |                                |
 | phone_number    | string     | null: false                    |
 | purchase        | references | null: false, foreign_key: true |
 
