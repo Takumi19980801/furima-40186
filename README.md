@@ -1,24 +1,60 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| name               | string | null: false |
+| email              | string | null: false |
+| password           | string | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :purchases
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| name               | string     | null: false                    |
+| text               | string     | null: false                    |
+| category           | string     | null: false                    |
+| image              | string     | null: false                    |
+| price              | string     | null: false                    |
+| condition          | string     | null: false                    |
+| source             | string     | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :users
+- has_one    :purchases
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchases テーブル
 
-* Deployment instructions
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| number         | string     | null: false                    |
+| date of expiry | string     | null: false                    |
+| cvc            | string     | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| item           | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :users
+- belongs_to :items
+- has_many :shipping address
+
+## shipping address テーブル
+
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| delivery charge | string     | null: false                    |
+| delivery date   | string     | null: false                    |
+| purchase        | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :purchases
