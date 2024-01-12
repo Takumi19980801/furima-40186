@@ -72,6 +72,36 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
+      it 'userが紐付いていないと保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+      it 'categoryを選択していないと保存できないこと' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+      it 'conditionを選択していないと保存できないこと' do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it 'shipping_cost_burdenを選択していないと保存できないこと' do
+        @item.shipping_cost_burden_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping cost burden can't be blank")
+      end
+      it 'prefectureを選択していないと保存できないこと' do
+        @item.prefecture_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it 'day_to_shipを選択していないと保存できないこと' do
+        @item.day_to_ship_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day to ship can't be blank")
+      end
     end
   end
 end

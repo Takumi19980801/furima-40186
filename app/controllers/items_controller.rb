@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]  # Deviseを使用している場合
   def index
-    @items = Item.all
+    # @items = Item.all
   end
 
   def new
