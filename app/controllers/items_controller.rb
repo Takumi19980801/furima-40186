@@ -24,7 +24,11 @@ class ItemsController < ApplicationController
 
   def edit
     if current_user && @item.user == current_user
-      render :edit
+      if @item.order.present?
+        redirect_to root_path and return
+      else
+        render :edit
+      end
     else
       redirect_to root_path
     end
